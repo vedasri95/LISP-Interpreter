@@ -1,6 +1,0 @@
-(DEFUN SILLY () 12)
-$
-(DEFUN SILLY () 3334)
-$
-(SILLY)
-$$
