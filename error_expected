@@ -1,0 +1,107 @@
+X
+Error - Unbound Atom: X.
+(PLUS . (3 . (4 . NIL)))
+7
+(1 . 2)
+Error - Arguments for function application are not a valid list.
+(1 . (2 . (3 . (4 . NIL))))
+Error - Cannot apply integer atom 1 as a function.
+(CAR . ((QUOTE . ((4 . NIL) . NIL)) . NIL))
+4
+(CDR . ((4 . NIL) . NIL))
+Error - Cannot apply integer atom 4 as a function.
+((1 . NIL) . (3 . (4 . NIL)))
+Error - Cannot evaluate: ((1 . NIL) . (3 . (4 . NIL)))
+(CAR . (3 . NIL))
+Error - Function CAR expects non atomic argument.
+(CDR . (3 . NIL))
+Error - Function CDR expects non atomic argument.
+(PLUS . ((3 . 4) . (5 . NIL)))
+Error - Arguments for function application are not a valid list.
+(QUOTE . (3 . 4))
+Error - Argument for QUOTE is not a valid list.
+(QUOTE . (4 . (5 . (NIL . NIL))))
+Error - QUOTE expects 1 argument(s), but found 3 argument(s).
+(QUOTE . ((3 . 4) . NIL))
+(3 . 4)
+(QUOTE . ((3 . 4) . (5 . (7 . (8 . (NIL . NIL))))))
+Error - QUOTE expects 1 argument(s), but found 5 argument(s).
+(CAR . (3 . NIL))
+Error - Function CAR expects non atomic argument.
+(CAR . ((QUOTE . ((3 . 4) . NIL)) . NIL))
+3
+(CAR . (1 . (2 . NIL)))
+Error - CAR expects 1 argument(s), but found 2 argument(s).
+(CAR . ((QUOTE . ((3 . NIL) . NIL)) . (2 . NIL)))
+Error - CAR expects 1 argument(s), but found 2 argument(s).
+(CONS . (1 . NIL))
+Error - CONS expects 2 argument(s), but found 1 argument(s).
+(CONS . (2 . (3 . (4 . NIL))))
+Error - CONS expects 2 argument(s), but found 3 argument(s).
+(CONS . ((QUOTE . ((5 . 6) . NIL)) . ((QUOTE . ((1 . NIL) . NIL)) . NIL)))
+((5 . 6) . (1 . NIL))
+(CONS . (2 . (3 . NIL)))
+(2 . 3)
+(ATOM . ((QUOTE . (X . NIL)) . NIL))
+T
+(ATOM . (3 . (4 . NIL)))
+Error - ATOM expects 1 argument(s), but found 2 argument(s).
+(NULL . ((QUOTE . ((5 . 6) . NIL)) . (3 . (5 . (6 . (7 . (8 . (9 . (4 . NIL)))))))))
+Error - NULL expects 1 argument(s), but found 8 argument(s).
+(INT . (4 . (5 . (6 . ((QUOTE . ((NIL . NIL) . NIL)) . NIL)))))
+Error - INT expects 1 argument(s), but found 4 argument(s).
+(LESS . (5 . (6 . (7 . NIL))))
+Error - LESS expects 2 argument(s), but found 3 argument(s).
+(LESS . (3 . NIL))
+Error - LESS expects 2 argument(s), but found 1 argument(s).
+(GREATER . (3 . (4 . (8 . NIL))))
+Error - GREATER expects 2 argument(s), but found 3 argument(s).
+(GREATER . ((QUOTE . ((12 . 3) . NIL)) . (5 . NIL)))
+Error - Arithmetic operations can only be done between two integer atoms.
+(EQ . ((QUOTE . ((3 . 4) . NIL)) . (7 . NIL)))
+Error - EQ can only be applied to two atomic arguments.
+(EQ . ((QUOTE . ((3 . 4) . NIL)) . (7 . (8 . NIL))))
+Error - EQ expects 2 argument(s), but found 3 argument(s).
+(EQ . ((QUOTE . ((3 . 4) . NIL)) . NIL))
+Error - EQ expects 2 argument(s), but found 1 argument(s).
+(PLAUS . (3 . (4 . NIL)))
+Error - Function PLAUS is not on D-List.
+(MYTHESISISDUEINLIKETWOWEEKSHAHAHA . (5 . (8 . (9 . (10 . NIL)))))
+Error - Function MYTHESISISDUEINLIKETWOWEEKSHAHAHA is not on D-List.
+(DEFUN . (TRIVIAL . ((X . NIL) . (X . NIL))))
+TRIVIAL
+(DEFUN . (COUNT . ((X . NIL) . ((COND . (((ATOM . (X . NIL)) . (1 . NIL)) . ((T . ((PLUS . ((COUNT . ((CAR . (X . NIL)) . NIL)) . ((COUNT . ((CDR . (X . NIL)) . NIL)) . NIL))) . NIL)) . NIL))) . NIL))))
+COUNT
+(TRIVIAL . NIL)
+Error - TRIVIAL expects 1 argument(s), but found 0 argument(s).
+(COUNT . NIL)
+Error - COUNT expects 1 argument(s), but found 0 argument(s).
+(TRIVIAL . (123 . (123 . NIL)))
+Error - TRIVIAL expects 1 argument(s), but found 2 argument(s).
+(COUNT . (15 . (15 . (15 . (15 . NIL)))))
+Error - COUNT expects 1 argument(s), but found 4 argument(s).
+(COND . ((T . (1 . NIL)) . ((NIL . (0 . NIL)) . NIL)))
+1
+(COND . ((T . (1 . (2 . NIL))) . ((NIL . (0 . NIL)) . NIL)))
+Error - All clauses of COND must be a list of size 2.
+(COND . ((3 . (4 . NIL)) . ((5 . (6 . NIL)) . NIL)))
+4
+(COND . ((NIL . (0 . NIL)) . ((T . NIL) . NIL)))
+Error - All clauses of COND must be a list of size 2.
+(COND . ((T . (NIL . NIL)) . (NIL . NIL)))
+Error - All clauses of COND must be a list of size 2.
+(COND . NIL)
+Error - All conditions of COND evaluated to false.
+(COND . ((QUOTE . ((2 . 3) . NIL)) . NIL))
+Error - Unbound Atom: QUOTE.
+(DEFUN . (F . ((P1 . (P2 . NIL)) . NIL)))
+Error - DEFUN expects 3 argument(s), but found 2 argument(s).
+(DEFUN . NIL)
+Error - DEFUN expects 3 argument(s), but found 0 argument(s).
+(DEFUN . (FUNCNAME . (3 . (X . NIL))))
+Error - Parameters for a function definition must be a list.
+(DEFUN . (EQUAL . ((X . NIL) . ((COND . (((ATOM . (X . NIL)) . ((COND . (((ATOM . (Y . NIL)) . ((EQ . (X . (Y . NIL))) . NIL)) . ((T . (NIL . NIL)) . NIL))) . NIL)) . (((ATOM . (Y . NIL)) . (NIL . NIL)) . (((EQUAL . ((CAR . (X . NIL)) . ((CAR . (Y . NIL)) . NIL))) . ((EQUAL . ((CDR . (X . NIL)) . ((CDR . (Y . NIL)) . NIL))) . NIL)) . ((T . (NIL . NIL)) . NIL))))) . NIL))))
+EQUAL
+(EQUAL . ((QUOTE . ((1 . 2) . NIL)) . NIL))
+Error - Unbound Atom: Y.
+Goodbye!

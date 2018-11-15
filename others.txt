@@ -1,0 +1,455 @@
+(3 5 (XYZ) 7 )
+$
+123 (3 5 (XYZ) 7 )
+$
+(NIL 5 () (()) 7 (() 9 ()))
+$
+
+(DEFUN F () (MINUS 100 200))
+(NIL 5 () (()) 7 (() 9 ()))
+$
+(DEFUN F () (MINUS 100 200))
+$
+(F)
+$
+(DEFUN FIBONACCI (N)
+	(COND
+		((EQ 0 N) 1)
+		((EQ 1 N) 1)
+		(T (PLUS (FIBONACCI (MINUS N 1)) (FIBONACCI (MINUS N 2))))
+	)
+)
+$
+
+(FIBONACCI 5)
+$
+
+(DEFUN APPEND (S1 S2)
+	(COND
+		((NULL S1) S2)
+		(T (CONS (CAR S1) (APPEND (CDR S1) S2)))
+	)
+)
+$
+(APPEND (QUOTE (2 3 4)) (QUOTE (2 3 4)))
+$
+
+(DEFUN LIST (S1)
+	(CONS S1 NIL)
+)
+$
+(DEFUN REVERSE (LIST)
+	(COND
+		((NULL LIST) LIST)
+		(T (APPEND (REVERSE (CDR LIST)) (LIST (CAR LIST))))
+	)
+)
+$
+(REVERSE (QUOTE (1 2 3 4)))
+$
+(DEFUN DIFF (X Y) (COND ( (EQ X Y) NIL ) (T T) ) )
+$
+(NULL (DIFF 6 6))
+$
+
+(DEFUN MEM (X LIST) (
+		COND 
+		((NULL LIST) NIL )
+		 ( T (COND 
+				( (EQ X (CAR LIST)) T ) 
+				( T (MEM X (CDR LIST)))))))
+$
+(MEM 5 (QUOTE (2 3 4)))
+$
+
+(DEFUN UNI (S1 S2)
+	(COND ( (NULL S1) S2)
+		( (NULL S2) S1)
+		( T (COND
+				( (MEM (CAR S1) S2) (UNI (CDR S1) S2) )
+				( T (CONS   (CAR S1) (UNI (CDR S1) S2) ))
+			)
+		)
+	)
+)
+$
+(MEM (CAR (QUOTE (1 2))) (QUOTE (2 3)))
+$
+(UNI (QUOTE (1 2 4)) (QUOTE (2 3 4 5)))
+$
+(DIFF (PLUS 1 2) (TIMES 1 3))
+$
+(TIMES (FIBONACCI 3) (FIBONACCI 5))
+$
+(MINUS 1 (FIBONACCI 7))
+$
+(MEM (FIBONACCI 7) (REVERSE (QUOTE (1 2 3 4))))
+$
+(DEFUN LENGTH (LIST)
+    (COND ((NULL LIST) 0)
+          (T (PLUS 1 (LENGTH (CDR LIST))))))
+$
+(LENGTH NIL)
+$
+(LENGTH (QUOTE (1)))
+$
+(LENGTH (QUOTE (1 2 3 4 5)))
+$
+(LENGTH (QUOTE (1 (2 3) 4 5)))
+$
+(DEFUN ISEVEN (N)
+    (COND ((EQ N 0) T)
+          ((EQ N 1) NIL)
+          (T (ISEVEN (MINUS N 2)))))
+$
+(ISEVEN 0)
+$
+(ISEVEN 1)
+$
+(ISEVEN 2)
+$
+(ISEVEN 3)
+$
+(ISEVEN 99)
+$
+(ISEVEN 100)
+$
+(DEFUN ISLIST (L)
+    (COND ((NULL L) T)
+          (T (ISLIST (CDR L)))))
+$
+(ISLIST NIL)
+$
+(ISLIST (QUOTE (())))
+$
+(ISLIST (QUOTE (1 2 3)))
+$
+(ISLIST (CONS 2 (QUOTE (3))))
+$
+(DEFUN GETLAST (LIST)
+    (COND ((EQ (LENGTH LIST) 1) (CAR LIST))
+          (T (GETLAST (CDR LIST)))))
+$
+(GETLAST (QUOTE (1)))
+$
+(GETLAST (QUOTE (1 2 3)))
+$
+(GETLAST (QUOTE (1 2 3 4 (5))))
+$
+(GETLAST (QUOTE ((1 2 3 4 5))))
+$
+(DEFUN CONCATENATE (L1 L2)
+    (COND ((EQ (LENGTH L1) 1) (CONS (CAR L1) L2))
+          (T (CONS (CAR L1) (CONCATENATE (CDR L1) L2)))))
+$
+(CONCATENATE (QUOTE (1)) NIL)
+$
+(CONCATENATE (QUOTE (1)) (QUOTE (2 3)))
+$
+(CONCATENATE (QUOTE (1 2 3 4)) (QUOTE (2)))
+$
+(CONCATENATE (QUOTE (1 2 2 3)) (QUOTE (2 3 NIL 3 5)))
+$
+(DEFUN GENASC (NUM)
+    (COND ((EQ NUM 0) NIL)
+          ((EQ NUM 1) (CONS 1 NIL))
+          (T (CONCATENATE (GENASC (MINUS NUM 1)) (CONS NUM NIL)))))
+$
+(GENASC 0)
+$
+(GENASC 1)
+$
+(GENASC 5)
+$
+(CONCATENATE (GENASC 4) (GENASC 5))
+$
+(GENASC (GETLAST (CONCATENATE (GENASC 3) (GENASC (LENGTH (QUOTE (3)))))))
+$
+(DEFUN GENASCXY (X Y)
+    (COND ((EQ X Y) (CONS X NIL))
+          (T (CONCATENATE (GENASCXY X (MINUS Y 1)) (CONS Y NIL)))))
+$
+(GENASCXY 5 5)
+$
+(GENASCXY 5 6)
+$
+(GENASCXY 5 10)
+$
+(DEFUN GENDESXY (X Y)
+    (COND ((EQ X Y) (CONS X NIL))
+          (T (CONS X (GENDESXY (MINUS X 1) Y)))))
+$
+(GENDESXY 5 5)
+$
+(GENDESXY 7 6)
+$
+(GENDESXY 15 10)
+$
+(DEFUN CONSPAIRS (LIST1 LIST2)
+    (COND ((NULL LIST1) (COND ((NULL LIST2) NIL) (T (QUOTE ERROR))))
+          (T (COND ((NULL LIST2) (QUOTE ERROR))
+                   (T (CONS (CONS (CAR LIST1) (CAR LIST2)) (CONSPAIRS (CDR LIST1) (CDR LIST2))))))))
+$
+(CONSPAIRS NIL NIL)
+$
+(CONSPAIRS (QUOTE (A)) (QUOTE (1)))
+$
+(CONSPAIRS (QUOTE (A B C D E F G)) (QUOTE (1 2 3 4 5 6 7)))
+$
+(CONSPAIRS (GENASC 5) (GENASC 5))
+$
+(CONSPAIRS (GENASCXY 1 4) (GENDESXY 77 74))
+$
+(DEFUN ADDPAIRS (X Y Z)
+    (COND ((NULL X) Z)
+          (T (CONS (CONS (CAR X) (CAR Y)) (ADDPAIRS (CDR X) (CDR Y) Z)))))
+$
+(ADDPAIRS NIL NIL NIL)
+$
+(ADDPAIRS NIL NIL (CONSPAIRS (QUOTE (A B C D E F G)) (QUOTE (1 2 3 4 5 6 7))))
+$
+(ADDPAIRS (QUOTE (A)) (QUOTE (1)) NIL)
+$
+(ADDPAIRS (QUOTE (A B)) (QUOTE (1 2)) NIL)
+$
+(ADDPAIRS (QUOTE (A B C D E)) (QUOTE (1 2 3 4 5)) NIL)
+$
+(ADDPAIRS (QUOTE (A)) (QUOTE (1)) (CONS (CONS (QUOTE B) 2) NIL))
+$
+(ADDPAIRS (QUOTE (A B)) (QUOTE (1 2)) (CONS (CONS (QUOTE C) 3) NIL))
+$
+(ADDPAIRS (QUOTE (A)) (QUOTE (1)) (CONS (CONS (QUOTE B) 2) (CONS (CONS (QUOTE C) 3) NIL)))
+$
+(ADDPAIRS (QUOTE (A B)) (QUOTE (1 2)) (CONS (CONS (QUOTE C) 3) (CONS (CONS (QUOTE D) 4) NIL)))
+$
+(ADDPAIRS (QUOTE (X Y)) (QUOTE (24 25)) (CONSPAIRS (QUOTE (A B C D E F G)) (QUOTE (1 2 3 4 5 6 7))))
+$
+(ADDPAIRS (QUOTE (V W X Y Z)) (QUOTE (22 23 24 25 26)) (CONSPAIRS (QUOTE (A B C D E F G)) (QUOTE (1 2 3 4 5 6 7))))
+$
+(DEFUN BOUND (X Z)
+    (COND ((NULL Z) NIL)
+          ((EQ X (CAR (CAR Z))) T)
+          (T (BOUND X (CDR Z)))))
+$
+(BOUND (QUOTE X) NIL)
+$
+(BOUND (QUOTE X) (QUOTE ((X 3))))
+$
+(BOUND (QUOTE X) (QUOTE ((A 3))))
+$
+(BOUND (QUOTE X) (QUOTE ((X 3) (A 5) (B 2) (C 1))))
+$
+(BOUND (QUOTE X) (QUOTE ((A 3) (X 5) (B 2) (C 1))))
+$
+(BOUND (QUOTE X) (QUOTE ((A 3) (B 5) (C 2) (X 6))))
+$
+(BOUND (QUOTE X) (QUOTE ((A 3) (B 5) (C 2) (D 6))))
+$
+(BOUND (QUOTE X) (CONSPAIRS (QUOTE (A B C X E F G)) (QUOTE (1 2 3 4 5 6 7))))
+$
+(BOUND (QUOTE X) (CONSPAIRS (QUOTE (A B C D E F G)) (QUOTE (1 2 3 4 5 6 7))))
+$
+(DEFUN GETVAL (X Z)
+    (COND ((BOUND X Z)
+                (COND ((EQ X (CAR (CAR Z))) (CDR (CAR Z)))
+                      (T (GETVAL X (CDR Z)))))
+          (T (QUOTE NOTBOUND))))
+$
+(GETVAL (QUOTE X) (QUOTE ((X 3))))
+$
+(GETVAL (QUOTE X) (QUOTE ((A 3))))
+$
+(GETVAL (QUOTE X) (QUOTE ((X 3) (A 5) (B 2) (C 1))))
+$
+(GETVAL (QUOTE X) (QUOTE ((A 3) (X 5) (B 2) (C 1))))
+$
+(GETVAL (QUOTE X) (QUOTE ((A 3) (B 5) (C 2) (X 6))))
+$
+
+(DEFUN FUN3 (A B)
+    (COND ((EQ A 0) (PLUS B 1))
+          ((EQ B 0) (FUN3 (MINUS A 1) 1))
+          (T (FUN3 (MINUS A 1) (FUN3 A (MINUS B 1))))))
+$
+(FUN3 1 2)
+$
+(FUN3 0 0)
+$
+(FUN3 1 1)
+$
+(FUN3 2 1)
+$
+(FUN3 2 4)
+$
+(FUN3 3 5)
+$
+
+(DEFUN FUN1 ()
+    (PLUS 2 3))
+$
+(FUN1)
+$
+(DEFUN GENDES1 (N)
+    (COND ((EQ N 0) NIL)
+          ((GREATER N 0) (CONS N (GENDES1 (MINUS N 1))))
+          (T (QUOTE ERROR))))
+$
+(GENDES1 0)
+$
+(GENDES1 1)
+$
+(GENDES1 13)
+$
+(CONSPAIRS (GENDES1 12) (GENDES1 12))
+$
+(CONCATENATE (GENDES1 6) (GENASC 3))
+$
+(CONSPAIRS (GENASC 5) (GENDES1 5))
+$
+
+(DEFUN FACT (N)
+    (COND ((LESS N 0) (QUOTE ERROR))
+          ((EQ N 0) 1)
+          ((GREATER N 0) (TIMES N (FACT (MINUS N 1))))
+          (T (QUOTE ERROR))))
+$
+(FACT 0)
+$
+(FACT 1)
+$
+(FACT 5)
+$
+(FACT (FACT 3))
+$
+(FACT (LENGTH (CONS 4 (CONS 3 (CONS 2 NIL)))))
+$
+(DEFUN FIBO (N)
+    (COND ((EQ N 0) 0)
+          ((EQ N 1) 1)
+          ((GREATER N 1) (PLUS (FIBO (MINUS N 1)) (FIBO (MINUS N 2))))
+          (T (QUOTE ERROR))))
+$
+(FIBO 0)
+$
+(FIBO 1)
+$
+(FIBO 2)
+$
+(FIBO 3)
+$
+(FIBO 4)
+$
+(FIBO 5)
+$
+(FIBO (FIBO 6))
+$
+(FIBO (FACT 3))
+$
+(FACT (FIBO (FACT 3)))
+$
+(DEFUN UNION (S1 S2)
+    (COND ((NULL S1) S2)
+        ((NULL S2) S1)
+        (T (COND ((MEM (CAR S1) S2) (UNION (CDR S1) S2))
+                 (T (CONS (CAR S1) (UNION (CDR S1) S2)))))))
+$
+(UNION (QUOTE (1 2 3)) (QUOTE (4 5)))
+$
+(UNION (CONS 2 NIL) (CONS 3 NIL))
+$
+(UNION NIL (QUOTE (3 2 1)))
+$
+(UNION (QUOTE (1 2 3)) NIL)
+$
+(DEFUN UNIQUE1 (L)
+    (COND ((NULL L) L)
+          ((MEM (CAR L) (CDR L)) (UNIQUE1 (CDR L)))
+          (T (CONS (CAR L) (UNIQUE1 (CDR L))))))
+$
+(UNIQUE1 NIL)
+$
+(UNIQUE1 (QUOTE (1)))
+$
+(UNIQUE1 (QUOTE (3 3)))
+$
+(UNIQUE1 (QUOTE (3 3 3 3 3)))
+$
+(UNIQUE1 (QUOTE (1 1 1 2 2 2 2 3 3 4 5 5 6)))
+$
+
+(DEFUN UNIQUE2 (L)
+    (COND ((NULL L) L)
+          (T (UNION (CONS (CAR L) NIL) (UNIQUE2 (CDR L))))))
+$
+(UNIQUE2 NIL)
+$
+(UNIQUE2 (QUOTE (3)))
+$
+(UNIQUE2 (QUOTE (4 4 4 4)))
+$
+(UNIQUE2 (QUOTE (1 1 1 2 3 3 4 5 5 6)))
+$
+
+(DEFUN UNIQUE3 (L)
+    (COND ((NULL L) L)
+          ((NULL (CDR L)) L)
+          ((EQ (CAR L) (CAR (CDR L))) (UNIQUE3 (CDR L)))
+          (T (CONS (CAR L) (UNIQUE3 (CDR L))))))
+$
+(UNIQUE3 NIL)
+$
+(UNIQUE3 (QUOTE (2)))
+$
+(UNIQUE3 (QUOTE (5 5)))
+$
+(UNIQUE3 (QUOTE (5 5 5 5 5)))
+$
+(UNIQUE3 (QUOTE (0 1 1 2 3 3 4 5 5 6 6 6 6)))
+$
+
+(DEFUN FUN2 ()
+    (MEM 3 (CDR (UNIQUE1 (QUOTE (0 0 1 2 3 3 3 4 5 5 5 5))))))
+$
+(FUN2)
+$
+
+(DEFUN XMEMB (X LIST)
+    (COND
+        ((NULL LIST) NIL)
+        ((EQ X (CAR LIST)) T)
+        (T (XMEMB X (CDR LIST)))
+     )
+)
+$
+
+(DEFUN ELIMINATEINL2 (L1 L2)
+    (COND
+        ((NULL L2) L1)
+        ((NULL L1) L1)
+        ((XMEMB (CAR L1) L2) (ELIMINATEINL2 (CDR L1) L2))
+        (T (CONS (CAR L1) (ELIMINATEINL2 (CDR L1) L2)))
+    )
+)
+$
+
+(DEFUN INSERTORDER (X L1)
+    (COND
+        ((NULL L1) (CONS X L1))
+        ((GREATER X (CAR L1)) (CONS (CAR L1) (INSERTORDER X (CDR L1))))
+        (T (CONS X L1))
+    )
+)
+$
+
+(DEFUN SORTLIST (L1)
+    (COND
+        ((NULL L1) L1)
+        (T (INSERTORDER (CAR L1) (SORTLIST (CDR L1))))
+     )
+)
+$
+(DEFUN ELIMINATENSORT (L1 L2) (SORTLIST (ELIMINATEINL2 L1 L2)))
+$
+(ELIMINATENSORT (QUOTE (1 3 4 6 7 2 6 1 5)) (QUOTE (1 4 5)))
+$$
+

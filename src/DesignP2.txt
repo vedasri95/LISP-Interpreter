@@ -1,0 +1,35 @@
+
+Some features of my design are 
+1. The LISP interpreter accepts s-expressions in both list and dot notation. But internally they are stored as dot expressions.
+2. The output produced by the LISP interpreter will be in dot notation
+3. In case there is an error Interpreter prints the error message and reads the next s-expression.
+	Example of an error message : ERROR ->No function defined with the name XYZ
+_________________________________________________________________________________________________________________________________
+The following files have been submitted as part of this project:
+1) Interpreter.java
+2) SExp.java
+3) Evaluator.java
+4) Makefile
+5) READMEP1.txt
+6) DesignP1.txt
+
+___________________________________________________________________________________________________________________________________________
+
+My implementation of the Lisp Interpreter consists of the following Java classes:
+1) SExp:
+ 	An "SExp" class has been created that corresponds to both atomic and non-atomic s-expressions. I have used the structure discussed 
+	in class for this purpose. 
+
+2) Interpreter:
+	Functions for reading input, for creating the binary tree and for printing the dotted expression are defined here.
+	The input has been read until the line having a single "$" has been seen. The input has been preprocessed to remove unwanted spaces,tabs,newlines etc.
+	Tokens have been created from the given input. Now after reading the input, grammar check has been done. Most of the error checks have done in this part. Some 
+	more error checks have been done in the next step. If no errors are reported from the previous step, I have called a function "makeTree" to create a binary tree 
+	for the given s-expression. To take both list and dotted notation into consideration, I also have "makeTreeHelper" function. These are similar to the "input[]" 
+	and "input2[]" functions discussed in class. After creating the tree the method "printTree" is used to output the dotted s-expression.
+
+3) Evaluator:
+	From the interpreter class, an object is created for the class Evaluator. The parsed S-Expression is sent to the Evaluator class and it returns the result to the
+	Interpreter class which displays it to the user. In the Evaluator class I have implemented eval, evcon, evlis and apply functions. a-list and d-list are also maintained 
+	in the Evaluator class. In case the given s-expression is not valid, an error message is raised and is passed to the main function.
+	
